@@ -1,0 +1,54 @@
+semantic_models:
+- name: orders
+  description: Order data with basic cleaning and transformation applied, one row
+    per order.
+  model: ref('stg_orders')
+  defaults:
+    agg_time_dimension: ordered_at
+  entities:
+  - name: order
+    type: primary
+    expr: order_id
+  - name: location
+    type: foreign
+    expr: location_id
+  - name: customer
+    type: foreign
+    expr: customer_id
+  dimensions:
+  - name: ordered_at
+    type: time
+    type_params:
+      time_granularity: day
+  measures:
+  - name: order_total
+    description: The total value of the order.
+    agg: sum
+    create_metric: true
+  - name: tax_paid
+    description: The total tax paid for the order.
+    agg: sum
+    create_metric: true
+  - name: count_order
+    agg: count
+    create_metric: true
+    expr: order_id
+  - name: count_location
+    agg: count_distinct
+    create_metric: true
+    expr: location_id
+  - name: count_customer
+    agg: count_distinct
+    create_metric: true
+    expr: customer_id
+
+metrics:
+- name: order_total_per_customer
+  description: Total order value per customer
+  label: Order Total per Customer
+  type: ratio
+  type_params:
+    denominator:
+      name: count_customer
+    numerator:
+      name: order_total
