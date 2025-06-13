@@ -31,3 +31,6 @@ models:
       - name: is_active
         description: Flag indicating if the customer is currently active.
         data_type: boolean
+      - name: customer_since
+        description: Date when the customer first became a customer.
+        data_type: timestamp_ntz

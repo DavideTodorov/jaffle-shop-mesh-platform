@@ -16,4 +16,3 @@ tasks:
     cmds:
       - dbt deps
       - dbt seed
-      - mv jaffle-data jaffle-data-loaded

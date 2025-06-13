@@ -25,7 +25,10 @@ renamed as (
         lifetime_value,
         
         ---------- booleans
-        is_active
+        is_active,
+        
+        ---------- dates
+        customer_since
 
     from source
 
