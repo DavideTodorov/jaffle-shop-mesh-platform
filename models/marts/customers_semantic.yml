@@ -87,15 +87,20 @@ semantic_models:
         agg: sum
         description: Total lifetime value of platinum tier customers
         expr: case when customer_tier = 'Platinum' then lifetime_value else 0 end
+      - name: non_premium_customer_count
+        agg: count
+        description: Count of customers who are not in gold or platinum tiers
+        expr: case when customer_tier not in ('Gold', 'Platinum') then customer_id end
+      - name: avg_premium_lifetime_value
+        agg: average
+        description: Average lifetime value of premium customers (Gold and Platinum tiers)
+        expr: case when customer_tier in ('Gold', 'Platinum') then lifetime_value end
+      - name: avg_non_premium_lifetime_value
+        agg: average
+        description: Average lifetime value of non-premium customers (Bronze and Silver tiers)
+        expr: case when customer_tier not in ('Gold', 'Platinum') then lifetime_value end
 
 metrics:
-  - name: total_customers
-    description: Total number of customers
-    type: simple
-    label: Customer Count
-    type_params:
-      measure: customer_count
-
   - name: active_customers
     description: Total number of active customers
     type: simple
@@ -103,16 +108,30 @@ metrics:
     type_params:
       measure: active_customer_count
 
-  - name: average_customer_value
-    description: Average lifetime value per customer
-    type: simple
-    label: Average Customer Value
-    type_params:
-      measure: avg_lifetime_value
-
   - name: premium_customers
     description: Count of premium tier customers (Gold and Platinum)
     type: simple
     label: Premium Customers
     type_params:
       measure: premium_customer_count
+      
+  - name: non_premium_customers
+    description: Count of non-premium tier customers (Bronze and Silver)
+    type: simple
+    label: Non-Premium Customers
+    type_params:
+      measure: non_premium_customer_count
+      
+  - name: average_premium_customer_value
+    description: Average lifetime value per premium customer (Gold and Platinum tiers)
+    type: simple
+    label: Average Premium Customer Value
+    type_params:
+      measure: avg_premium_lifetime_value
+      
+  - name: average_non_premium_customer_value
+    description: Average lifetime value per non-premium customer (Bronze and Silver tiers)
+    type: simple
+    label: Average Non-Premium Customer Value
+    type_params:
+      measure: avg_non_premium_lifetime_value
