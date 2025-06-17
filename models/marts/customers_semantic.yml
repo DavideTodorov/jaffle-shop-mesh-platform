@@ -109,29 +109,29 @@ metrics:
   #     measure: active_customer_count
 
   - name: premium_customers
-    description: Count of premium tier customers (Gold and Platinum)
+    description: Count of premium tier customers (Gold and Platinum). Premium customers bring are customers who generate revenue.
     type: simple
     label: Premium Customers
     type_params:
       measure: premium_customer_count
-      
+
   - name: non_premium_customers
-    description: Count of non-premium tier customers (Bronze and Silver)
+    description: Count of non-premium tier customers (Bronze and Silver). Non-premium customers are still valuable but do not generate any revenue.
     type: simple
     label: Non-Premium Customers
     type_params:
       measure: non_premium_customer_count
-      
+
   - name: average_premium_customer_value
     description: Average lifetime value per premium customer (Gold and Platinum tiers)
     type: simple
     label: Average Premium Customer Value
     type_params:
       measure: avg_premium_lifetime_value
-      
-  - name: average_non_premium_customer_value
-    description: Average lifetime value per non-premium customer (Bronze and Silver tiers)
-    type: simple
-    label: Average Non-Premium Customer Value
-    type_params:
-      measure: avg_non_premium_lifetime_value
+
+  # - name: average_non_premium_customer_value
+  #   description: Average lifetime value per non-premium customer (Bronze and Silver tiers)
+  #   type: simple
+  #   label: Average Non-Premium Customer Value
+  #   type_params:
+  #     measure: avg_non_premium_lifetime_value
