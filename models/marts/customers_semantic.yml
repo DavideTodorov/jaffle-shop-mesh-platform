@@ -101,12 +101,12 @@ semantic_models:
         expr: case when customer_tier not in ('Gold', 'Platinum') then lifetime_value end
 
 metrics:
-  - name: active_customers
-    description: Total number of active customers
-    type: simple
-    label: Active Customers
-    type_params:
-      measure: active_customer_count
+  # - name: active_customers
+  #   description: Total number of active customers
+  #   type: simple
+  #   label: Active Customers
+  #   type_params:
+  #     measure: active_customer_count
 
   - name: premium_customers
     description: Count of premium tier customers (Gold and Platinum)
